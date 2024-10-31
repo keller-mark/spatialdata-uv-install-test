@@ -13,11 +13,11 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "3.8"
           - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
+        
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
@@ -26,7 +26,7 @@ jobs:
       - name: Check that spatialdata can be installed with uv
         run: |
           uv init
-          uv add spatialdata
+          uv add 'spatialdata==0.2.3'
           echo 'from spatialdata import SpatialData' | uv run -
         env:
           UV_PYTHON: ${{ matrix.python-version }}
