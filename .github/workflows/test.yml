@@ -27,6 +27,7 @@ jobs:
         with:
           version: "latest"
       - name: Check that spatialdata can be installed with uv
+        if: ${{ always() }}
         run: |
           uv init
           uv add 'spatialdata==0.2.3'
