@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  TestPython:
+    name: Python / Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+      - name: Check that spatialdata can be installed with uv
+        run: |
+          uv init
+          uv add spatialdata
+          echo 'from spatialdata import SpatialData' | uv run -
+        env:
+          UV_PYTHON: ${{ matrix.python-version }}
