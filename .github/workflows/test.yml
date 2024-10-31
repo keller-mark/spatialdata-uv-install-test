@@ -5,15 +5,12 @@ on:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
-
 jobs:
   TestPython:
     name: Python / Test
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version:
           - "3.9"
@@ -27,7 +24,6 @@ jobs:
         with:
           version: "latest"
       - name: Check that spatialdata can be installed with uv
-        if: ${{ always() }}
         run: |
           uv init
           uv add 'spatialdata==0.2.3'
