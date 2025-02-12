@@ -27,7 +27,7 @@ jobs:
       - name: Check that spatialdata can be installed with uv
         run: |
           uv init
-          uv add 'spatialdata==0.2.3'
+          uv add 'spatialdata==0.3.0'
           echo 'from spatialdata import SpatialData' | uv run -
         env:
           UV_PYTHON: ${{ matrix.python-version }}
